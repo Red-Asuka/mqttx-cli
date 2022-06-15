@@ -5,7 +5,6 @@ import { parseNumber, parseProtocol } from './utils/parse'
 import { version } from '../package.json'
 
 const program = new Command()
-program.error
 
 program.name('mqttx').description('An MQTT client for the command line').version(version)
 
@@ -17,7 +16,7 @@ program
   .option('-i, --client-id <ID>', 'the client id')
   .option('-q, --qos <0/1/2>', 'the QoS of the message', parseNumber, 0)
   .requiredOption('-t, --topic <TOPIC>', 'the message topic')
-  .requiredOption('-m, --message <MSG>', 'the message body')
+  .option('-m, --message <MSG>', 'the message body', 'Hello From MQTT X CLI')
   .option('-r, --retain', 'send a retained message', false)
   .option('-s, --stdin', 'read the message body from stdin')
   .option('-M, --multiline', 'read lines from stdin as multiple messages')
