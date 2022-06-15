@@ -1,7 +1,7 @@
-const mqtt = require('mqtt')
-const fs = require('fs')
+import * as mqtt from 'mqtt'
+import * as fs from 'fs'
 
-const sub = (options) => {
+const sub = (options: any) => {
   if (options.key) {
     options.key = fs.readFileSync(options.key)
   }

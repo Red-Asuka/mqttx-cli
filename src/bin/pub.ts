@@ -1,11 +1,11 @@
-const mqtt = require('mqtt')
-const pump = require('pump')
-const fs = require('fs')
-const concat = require('concat-stream')
-const Writable = require('readable-stream').Writable
-const split2 = require('split2')
+import * as mqtt from 'mqtt'
+import * as fs from 'fs'
+import pump from 'pump'
+import concat from 'concat-stream'
+import { Writable } from 'readable-stream'
+import split2 from 'split2'
 
-const send = (options) => {
+const send = (options: any) => {
   const client = mqtt.connect(options)
   client.on('connect', () => {
     client.publish(options.topic, options.message, options, (err) => {
@@ -21,12 +21,12 @@ const send = (options) => {
   })
 }
 
-const multisend = (options) => {
+const multisend = (options: any) => {
   const client = mqtt.connect(options)
   const sender = new Writable({
     objectMode: true,
   })
-  sender._write = (line, enc, cb) => {
+  sender._write = (line, _enc, cb) => {
     client.publish(options.topic, line.trim(), options, cb)
   }
 
@@ -40,7 +40,7 @@ const multisend = (options) => {
   })
 }
 
-const pub = (options) => {
+const pub = (options: any) => {
   if (options.key) {
     options.key = fs.readFileSync(options.key)
   }
